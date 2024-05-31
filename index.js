@@ -29,18 +29,20 @@ const shuffledDeck = shuffle(deck);
 
 //Next we need to deal the deck, I did this by seperating
 //the even and odd positioned cards into player 1 and 2's
-//hands.
+//hands to ensure it was a more realistic deal.
 let playerOneHand = shuffledDeck.filter ((v,i)=> i % 2)
 let playerTwoHand = shuffledDeck.filter ((v,i)=> !(i % 2))
 
 let playerOneScore = 0;
 let playerTwoScore = 0;
 
+//here I set variables for player one and player two's cards being played
+//and allowing it to play one of each at a time
 for (let i = 0; i < 26; i++) {
     const playerOneCard = playerOneHand[i];
     const playerTwoCard = playerTwoHand[i];
 
-
+//I then set card value equal to numbers 2-14 to allow the higher card to win
 const cardValue = {
     '2': 2,
     '3': 3,
@@ -56,19 +58,24 @@ const cardValue = {
     'King': 13,
     'Ace': 14
 }
+//I then needed to set the players card equal to its value
 const playerOneCardValue = 
 cardValue[playerOneCard.split(" ")[0]];
 const playerTwoCardValue = 
 cardValue[playerTwoCard.split(" ")[0]];
 
+//Next was scoring based on whose card was higher, no need to add an else stating no
+//points are added as it automatically doesn't change score without input
 if (playerOneCardValue > playerTwoCardValue) {
     playerOneScore++
 }
 else if (playerOneCardValue < playerTwoCardValue) {
     playerTwoScore++
 }
+//Adding text to the console showing the cards played on scre following each hand.
 console.log(`Round ${i + 1}: ${playerOneCard} vs ${playerTwoCard}  Score ${playerOneScore}:${playerTwoScore}`);
 }
+//Ended with messages stating the winner and or a tie.
 if (playerOneScore > playerTwoScore) {
     console.log(`Player One wins ${playerOneScore}:${playerTwoScore}`)
 }
